@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<!-- Cabecera técnica del archivo (metadatos, título y enlaces externos) -->
+<head>
+   <meta charset="UTF-8">
+  <!-- Configuración de escala responsiva para adaptarse a navegadores móviles y de escritorio -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Texto visible en la pestaña del navegador -->
+  <title>Sistema de Mantenimiento | Frigel & Motan</title>  
+  <!-- Vinculación con la hoja de estilos CSS externa que creamos en el archivo anterior -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<!-- Cuerpo principal donde reside la estructura visual interactiva de la página -->
+<body>
+
+  <!-- Div contenedor principal para centrar la aplicación -->
+  <div class="container">
+
+    <!-- Encabezado con el título general del sistema -->
+    <h1>Historial de Mantenimiento Realizados </h1>
+
+    <!-- Tarjeta contenedora de la sección del formulario -->
+    <div class="card">
+
+      <!-- Título de la sección del formulario -->
+      <h2>Registro De Servicio De Mantenimiento</h2>
+
+      <!-- Formulario HTML con ID que servirá como punto de escucha para JavaScript -->
+      <form id="formServicio">
+
+        <!-- Contenedor grid para organizar los campos de entrada -->
+        <div class="form-grid">
+          
+          <!-- Agrupador del selector de Clientes -->
+          <div class="form-group">
+            <label for="selectCliente">Cliente:</label>
+            <!-- Selector desplegable dinámico para clientes -->
+            <select id="selectCliente" required>
+              <option value="">Cargando clientes...</option>
+            </select>
+          </div>
+
+          <!-- Agrupador del selector de Equipos -->
+          <div class="form-group">
+            <label for="selectEquipo">Equipo:</label>
+            <!-- Selector desplegable dinámico para equipos (inicia deshabilitado) -->
+            <select id="selectEquipo" required disabled>
+              <option value="">Seleccione primero un cliente</option>
+            </select>
+          </div>
+
+          <!-- Agrupador del selector de Ingenieros -->
+          <div class="form-group">
+            <label for="selectIngeniero">Ingeniero Asignado:</label>
+            <!-- Selector desplegable dinámico para ingenieros -->
+            <select id="selectIngeniero" required>
+              <option value="">Cargando ingenieros...</option>
+            </select>
+          </div>
+
+          <!-- Agrupador del selector de Tipo de Mantenimiento -->
+          <div class="form-group">
+            <label for="tipoMantenimiento">Tipo de Mantenimiento:</label>
+            <!-- Selector con opción por defecto en blanco y validación obligatoria -->
+            <select id="tipoMantenimiento" required>
+                <option value="" selected disabled>-- Seleccione un tipo --</option>
+                <option value="preventivo">Preventivo</option>
+                <option value="correctivo">Correctivo</option>
+                <option value="predictivo">Predictivo</option>
+                <option value="Visita Tecnica">Visita Técnica</option>
+            </select>
+          </div>
+
+          <!-- Campo de Fecha solo Día/Mes/Año (sin hora) -->
+            <div class="form-group">
+               <label for="fechaServicio">Fecha del Servicio:</label>
+               <input type="date" id="fechaServicio" required />
+            </div>
+
+           <!-- Hora Inicio -->
+            <div class="form-group">
+             <label for="horaInicio">Hora Inicio:</label>
+             <input type="time" id="horaInicio" required />
+           </div>
+
+          <!-- Hora Fin -->
+           <div class="form-group">
+            <label for="horaFin">Hora Fin:</label>
+            <input type="time" id="horaFin" required />
+           </div>
+   
+          <!-- Total Horas Trabajadas (Calculado automáticamente) -->
+           <div class="form-group">
+            <label for="horasTrabajadas">Total Horas Trabajadas:</label>
+            <input type="number" id="horasTrabajadas" value="0.0" readonly style="background-color: #e2e8f0; cursor: not-allowed;" />
+           </div>
+
+          <!-- Agrupador del campo de costo total -->
+          <div class="form-group">
+            <label for="costoTotal">Costo Total ($):</label>
+            <!-- Campo numérico para importes en moneda decimal -->
+            <input type="number" step="0.01" id="costoTotal" value="0.00" required />
+          </div>
+
+          <!-- Agrupador del estado del servicio -->
+          <div class="form-group">
+        <label for="estadoServicio">Estado del Servicio:</label>
+        <!-- Selector con opción por defecto en blanco y validación obligatoria -->
+        <select id="estadoServicio" required>
+            <option value="" selected disabled>-- Seleccione un estado --</option>
+            <option value="completado">Completado</option>
+            <option value="pendiente">Pendiente</option>
+            <option value="cancelado">Cancelado</option>
+        </select>
+        </div>
+          <!-- Agrupador de la descripción técnica (ocupa 2 columnas) -->
+          <div class="form-group" style="grid-column: span 2;">
+            <label for="descripcionTrabajo">Descripción del Trabajo:</label>
+            <!-- Área de texto multirreglón -->
+            <textarea id="descripcionTrabajo" rows="2" placeholder="Detalle las tareas realizadas..." required></textarea>
+          </div>
+
+          <!-- Agrupador del Diagnóstico Técnico (ocupa 2 columnas) -->
+          <div class="form-group" style="grid-column: span 2;">
+            <label for="diagnostico">Diagnóstico Técnico:</label>
+            <textarea id="diagnostico" rows="2" placeholder="Ingrese el diagnóstico o causa raíz del problema..."></textarea>
+          </div>
+
+          <!-- Selector de Repuestos con Checkboxes (Ocupa todo el ancho y se centra) -->
+          <div class="span-full text-center">
+            <label class="form-label-bold">Repuestos Utilizados:</label>
+            <div id="contenedorRepuestos" class="checkbox-grid"></div>
+          </div>
+
+            <!-- Botón de Guardar Orden de Servicio (Centrado) -->
+          <div class="span-full text-center" style="margin-top: 20px;">
+            <button type="submit" class="btn-guardar">Guardar Orden de Servicio</button>
+          </div>
+
+        <!-- Cierre del contenedor grid del formulario -->
+        </div>
+
+      <!-- Cierre del formulario -->
+      </form>
+
+    <!-- Cierre de la tarjeta del formulario -->
+    </div>
+
+    
+    <!-- TABLA DE REGISTROS -->
+    <!-- Tarjeta contenedora de la vista del historial -->
+    <div class="card">
+
+      <!-- Subtítulo de la sección de visualización de mantenimientos -->
+      <h2>Órdenes de Servicio Registradas</h2>
+
+   <!-- CONTENEDOR DE FILTROS INTERACTIVOS -->
+    <div style="margin-bottom: 20px;">
+      
+      <!-- FILA 1: Desplegables de Filtros (País, Cliente, Fecha) -->
+      <div style="display: flex; gap: 15px; margin-bottom: 15px; flex-wrap: wrap;">
+        
+        <!-- Selector de País -->
+        <div class="form-group" style="flex: 1; min-width: 150px; margin-bottom: 0;">
+          <label for="filtroPais">Filtrar por País:</label>
+          <select id="filtroPais">
+            <option value="">Todos los países</option>
+          </select>
+        </div>
+
+        <!-- Selector de Cliente -->
+        <div class="form-group" style="flex: 1; min-width: 200px; margin-bottom: 0;">
+          <label for="filtroCliente">Filtrar por Cliente:</label>
+          <select id="filtroCliente">
+            <option value="">Todos los clientes</option>
+          </select>
+        </div>
+
+        <!-- Selector de Fecha -->
+        <div class="form-group" style="flex: 1; min-width: 150px; margin-bottom: 0;">
+          <label for="filtroFecha">Filtrar por Fecha:</label>
+          <input type="date" id="filtroFecha" />
+        </div>
+
+      </div>
+
+      <!-- FILA 2: Botones de Acción (Debajo de los filtros) -->
+      <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+        <button type="button" id="btnLimpiarFiltros" style="padding: 10px 15px; background-color: #64748b; color: white; border: none; border-radius: 6px; cursor: pointer;">
+          Ver nuevamente los Recientes
+        </button>
+        <button type="button" id="btnVerTodoHistorial" style="padding: 10px 15px; background-color: #1e293b; color: white; border: none; border-radius: 6px; cursor: pointer;">
+          Ver todo el historial
+        </button>
+        
+        <!-- BOTÓN DE EXCEL AGREGADO AQUÍ -->
+        <button type="button" id="btnExportarExcel" class="btn-excel">
+          📊 Exportar Excel (Filtrado)
+        </button>
+      </div>
+
+    </div>
+
+      <!-- Estructura de la tabla de registros -->
+      <table id="tablaServicios">
+
+        <!-- Encabezado estático de la tabla -->
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Fecha</th>
+                <th>Cliente</th>
+                <th>Equipo</th>
+                <th>Ingeniero</th>
+                <th>Tipo</th>
+                <th>Estado</th>
+                <th>Acciones</th> <!-- Debe estar esta columna -->
+            </tr>
+        </thead>
+
+        <!-- Cuerpo dinámico donde se inyectarán las filas procesadas por JS -->
+        <tbody>
+          <tr><td colspan="8">Cargando mantenimientos...</td></tr>
+        </tbody>
+
+      <!-- Cierre de la tabla -->
+      </table>
+
+    <!-- Cierre de la tarjeta de la tabla -->
+    </div>
+
+  <!-- Importación del script de JavaScript externo encargado de la lógica y la comunicación con la API -->
+  <script src="js/app.js"></script>
+
+<!-- Cierre del cuerpo del HTML -->
+</body>
+
+<!-- Cierre del documento HTML -->
+</html>

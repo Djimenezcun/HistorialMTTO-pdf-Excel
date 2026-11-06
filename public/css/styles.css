@@ -1,0 +1,296 @@
+/* Reseteo global: obliga a que el padding y border se incluyan dentro del ancho total de cada elemento */
+* {
+  box-sizing: border-box; /* Incluye el borde y el relleno en el cálculo de dimensiones */
+  font-family: 'Segoe UI', Arial, sans-serif; /* Define la familia tipográfica principal */
+  margin: 0; /* Elimina márgenes exteriores por defecto de todos los elementos */
+  padding: 0; /* Elimina rellenos interiores por defecto de todos los elementos */
+}
+
+/* Configuración de la capa principal de la pantalla */
+body {
+  background-color: #f4f7f6; /* Define un color de fondo gris claro para descansar la vista */
+  color: #333; /* Establece el color predeterminado del texto en gris oscuro */
+  padding: 20px; /* Agrega un espacio interior de 20 píxeles alrededor de toda la ventana */
+}
+
+/* Contenedor central de la interfaz */
+.container {
+  max-width: 1200px; /* Limita el ancho máximo de la aplicación a 1200 píxeles */
+  margin: 0 auto; /* Centra horizontalmente el contenedor en la pantalla */
+}
+
+/* Encabezado principal del sistema */
+h1 {
+  text-align: center;
+  color: #1e3a8a; /* Aplica color azul marino oscuro al título principal */
+  margin-bottom: 20px; /* Separa el título del contenido inferior con 20 píxeles */
+}
+
+/* Estilos de las tarjetas (contenedores del formulario y de la tabla) */
+.card {
+  background: white; /* Establece el fondo de las tarjetas en color blanco */
+  padding: 20px; /* Añade relleno interior de 20 píxeles */
+  border-radius: 8px; /* Redondea los bordes de la tarjeta a 8 píxeles */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Agrega una sombra tenue en la parte inferior */
+  margin-bottom: 25px; /* Crea una separación de 25 píxeles respecto al siguiente bloque */
+}
+
+/* Subtítulos dentro de las tarjetas */
+.card h2 {
+  color: #1e293b; /* Color de texto azul pizarra para los subtítulos */
+  font-size: 1.2rem; /* Tamaño de fuente relativo moderado */
+  margin-bottom: 15px; /* Espacio de 15 píxeles debajo del subtítulo */
+  border-bottom: 2px solid #e2e8f0; /* Agrega una línea divisoria horizontal gris clara */
+  padding-bottom: 8px; /* Espacio entre el texto del subtítulo y la línea divisoria */
+}
+
+/* Distribución de la retícula del formulario usando CSS Grid */
+.form-grid {
+  display: grid; /* Activa el modelo de maquetación por cuadrícula */
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Crea columnas flexibles de mínimo 220px */
+  gap: 15px; /* Establece una separación de 15 píxeles entre los campos */
+}
+
+/* Agrupador de cada etiqueta y su respectivo input o select */
+.form-group {
+  display: flex; /* Activa el modelo Flexbox */
+  flex-direction: column; /* Alinea la etiqueta arriba y el campo abajo en forma vertical */
+}
+
+/* Estilo de los textos de etiquetas en el formulario */
+.form-group label {
+  font-size: 0.85rem; /* Tamaño de texto pequeño para etiquetas */
+  font-weight: bold; /* Aplica formato de texto en negrita */
+  margin-bottom: 5px; /* Separa la etiqueta del campo de entrada por 5 píxeles */
+  color: #4b5563; /* Color de texto gris intermedio */
+}
+
+/* Estilo unificado para cajas de texto, desplegables y áreas de texto */
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 8px 12px; /* Relleno interno vertical de 8px y horizontal de 12px */
+  border: 1px solid #cbd5e1; /* Borde delgado gris claro */
+  border-radius: 4px; /* Bordes ligeramente redondeados a 4 píxeles */
+  font-size: 0.9rem; /* Tamaño de letra dentro de las entradas de texto */
+}
+
+/* Regla especial para el campo de descripción multirreglón */
+.form-group textarea {
+  resize: vertical; /* Permite redimensionar el campo solo de arriba a abajo */
+  grid-column: span 2; /* Hace que el campo ocupe el ancho de 2 columnas de la cuadrícula */
+}
+
+/* Estilo del botón de envío del formulario */
+.btn {
+  background-color: #2563eb; /* Color de fondo azul intenso */
+  color: white; /* Color de texto blanco */
+  border: none; /* Elimina el borde por defecto del botón */
+  padding: 10px 18px; /* Relleno interno superior/inferior de 10px e izquierdo/derecho de 18px */
+  border-radius: 4px; /* Bordes redondeados a 4 píxeles */
+  cursor: pointer; /* Cambia el puntero del mouse a una mano al posicionarse encima */
+  font-weight: bold; /* Texto en negrita */
+  margin-top: 15px; /* Separa el botón de los campos superiores por 15 píxeles */
+  transition: background 0.2s; /* Transición suave de 0.2 segundos en cambios de color */
+}
+
+/* Estado del botón al pasar el cursor sobre él */
+.btn:hover {
+  background-color: #1d4ed8; /* Oscurece el tono de azul al pasar el mouse */
+}
+
+/* Estructura general de la tabla de registros */
+table {
+  width: 100%; /* La tabla ocupa el 100% del ancho de su tarjeta contenedora */
+  border-collapse: collapse; /* Colapsa los bordes adyacentes en una sola línea */
+  margin-top: 15px; /* Separa la tabla del subtítulo por 15 píxeles */
+  background: white; /* Fondo blanco interno */
+  border-radius: 8px; /* Esquinas redondeadas para el contenedor de la tabla */
+  overflow: hidden; /* Recorta las esquinas sobrantes de la tabla para respetar el borderradius */
+}
+
+/* Estilos compartidos para celdas de encabezado y celdas de datos */
+th, td {
+  padding: 12px; /* Relleno interno de 12 píxeles por celda */
+  text-align: left; /* Alinea el texto a la izquierda */
+  border-bottom: 1px solid #e2e8f0; /* Borde inferior gris muy suave para separar filas */
+  font-size: 0.85rem; /* Tamaño de texto uniforme en la tabla */
+}
+
+/* Encabezados superiores de la tabla */
+th {
+  background-color: #1e293b; /* Fondo azul oscuro noche para los títulos de columna */
+  color: white; /* Texto en blanco para resaltar */
+  font-weight: 600; /* Grosor de fuente seminegrita */
+}
+
+/* Efecto visual al pasar el cursor sobre las filas de datos */
+tr:hover {
+  background-color: #f8fafc; /* Cambia el fondo a gris ultra claro al señalar una fila */
+}
+
+/* Clase base para las etiquetas de tipo de mantenimiento */
+.badge {
+  padding: 4px 8px; /* Relleno interior compacto */
+  border-radius: 12px; /* Redondeado tipo píldora */
+  font-size: 0.75rem; /* Texto pequeño */
+  font-weight: bold; /* Texto en negrita */
+  display: inline-block; /* Permite aplicar márgenes y rellenos correctamente */
+}
+
+/* Estilo distintivo para mantenimientos preventivos */
+.preventivo {
+  background-color: #dbeafe; /* Fondo azul claro */
+  color: #1e40af; /* Texto azul oscuro */
+}
+
+/* Estilo distintivo para mantenimientos correctivos */
+.correctivo {
+  background-color: #fee2e2; /* Fondo rojo claro */
+  color: #991b1b; /* Texto rojo oscuro */
+}
+
+/* Estilo distintivo para mantenimientos predictivos */
+.predictivo {
+  background-color: #fef3c7; /* Fondo amarillo claro */
+  color: #92400e; /* Texto café/marrón oscuro */
+}
+
+/* Estilo distintivo para visitas técnicas */
+.visita-tecnica {
+  background-color: #e0e7ff; /* Fondo violeta suave */
+  color: #3730a3; /* Texto púrpura oscuro */
+}
+
+/* ==============================================================================
+   REGLAS PARA CONTENEDORES Y REPARTICIÓN DE ESPACIOS (GRID)
+   ============================================================================== */
+
+/* Ocupa dos columnas completas dentro del grid del formulario */
+.span-2 {
+  grid-column: span 2; /* Hace que el elemento abarque 2 columnas en lugar de 1 */
+}
+
+/* Estilo estandarizado para etiquetas de título en campos agrupados */
+.form-label-bold {
+  font-weight: bold;    /* Aplica texto en negrita */
+  margin-bottom: 8px;   /* Genera una separación vertical con las casillas de abajo */
+  display: block;       /* Fuerza al elemento a comportarse como bloque para respetar el margen */
+}
+
+/* ==============================================================================
+   CONTENEDOR MULTI-SELECCIÓN DE REPUESTOS (CHECKBOXES)
+   ============================================================================== */
+
+/* Rejilla contenedora adaptable con desplazamiento (scroll) */
+.checkbox-grid {
+  display: grid; /* Activa la maquetación CSS Grid */
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
+  /* Crea automáticamente tantas columnas como quepan de mínimo 200px cada una */
+
+  gap: 10px;                  /* Espaciado uniforme de 10px entre cada casilla */
+  background-color: #f8fafc;  /* Fondo gris claro para diferenciarlo del formulario */
+  border: 1px solid #cbd5e1;  /* Borde delgado gris claro para delimitar la caja */
+  border-radius: 6px;         /* Esquinas redondeadas */
+  padding: 12px;              /* Relleno interno para que el contenido no toque los bordes */
+  max-height: 150px;          /* Limita la altura máxima de la caja a 150px */
+  overflow-y: auto;           /* Activa la barra de desplazamiento vertical solo si los elementos exceden la altura */
+}
+
+/* Estilo individual para cada opción dentro del selector */
+.checkbox-item {
+  display: flex;          /* Activa Flexbox para alinear el checkbox con la etiqueta de texto */
+  align-items: center;    /* Centra verticalmente el cuadro de verificación con el texto */
+  gap: 8px;               /* Separación horizontal de 8px entre el cuadrito y la palabra */
+  cursor: pointer;        /* Cambia el puntero del mouse a una mano para indicar interactividad */
+  font-size: 14px;        /* Tamaño de fuente legible para el listado de repuestos */
+} 
+
+/* Ocupa el ancho completo de lado a lado en la rejilla del formulario */
+.span-full {
+  grid-column: 1 / -1;
+}
+
+/* Alinea el texto y los elementos inline al centro */
+.text-center {
+  text-align: center;
+}
+
+/* Centra el título y limita el ancho del contenedor gris de checkboxes */
+.checkbox-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
+  background-color: #f8fafc;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  padding: 12px;
+  max-height: 150px;
+  overflow-y: auto;
+  max-width: 600px;  /* Controla el ancho máximo de la caja */
+  margin: 0 auto;   /* Centra la caja horizontalmente */
+  text-align: left;  /* Mantiene el texto interno de los repuestos alineado a la izquierda */
+}
+
+/* Estilo y centrado del botón de guardado */
+.btn-guardar {
+  padding: 12px 28px;
+  background-color: #2563eb;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.btn-guardar:hover {
+  background-color: #1d4ed8;
+}
+
+/* Ajustes para pantallas pequeñas y dispositivos móviles */
+@media (max-width: 768px) {
+
+  /* 1. Forzar a que el formulario use una sola columna */
+  form, 
+  .grid-form, 
+  .form-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  /* 2. Todos los campos ocupan el ancho total del contenedor */
+  .span-full, 
+  .form-group, 
+  input, 
+  select, 
+  textarea {
+    grid-column: 1 / -1 !important;
+    width: 100% !important;
+    box-sizing: border-box;
+  }
+
+  /* 3. Ajuste de la caja de checkboxes en móvil */
+  .checkbox-grid {
+    grid-template-columns: 1fr !important; /* Una sola columna para los repuestos */
+    max-width: 100% !important;
+    max-height: 200px;
+  }
+
+  /* 4. Scroll horizontal suave para la tabla de mantenimientos sin romper el diseño */
+  .table-container,
+  #tablaServicios {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* 5. Asegura que el botón ocupe el ancho completo para facilitar el toque */
+  .btn-guardar {
+    width: 100% !important;
+    padding: 14px;
+    font-size: 16px;
+  }
+}
